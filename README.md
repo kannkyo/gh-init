@@ -4,7 +4,7 @@ A [GitHub CLI extension](https://cli.github.com/manual/gh_extension) that genera
 
 ## Installation
 
-```
+```bash
 gh extension install kannkyo/gh-scaffolder
 ```
 
@@ -16,7 +16,7 @@ All commands use your existing `gh` authentication — no extra login step is re
 
 Fetches a license template from GitHub, fills in `[year]` (current year) and `[fullname]` (from `git config user.name`), and writes it to `./LICENSE`. Fails if `LICENSE` already exists.
 
-```
+```bash
 gh scaffolder license create mit
 gh scaffolder license create apache-2.0
 ```
@@ -27,7 +27,7 @@ gh scaffolder license create apache-2.0
 
 Prints the names of all available `.gitignore` templates, one per line.
 
-```
+```bash
 gh scaffolder ignore list
 ```
 
@@ -35,7 +35,7 @@ gh scaffolder ignore list
 
 Prints the contents of a `.gitignore` template to stdout without writing any file.
 
-```
+```bash
 gh scaffolder ignore view Go
 ```
 
@@ -43,7 +43,7 @@ gh scaffolder ignore view Go
 
 Fetches a `.gitignore` template from GitHub and writes it to `./.gitignore`. Fails if `.gitignore` already exists.
 
-```
+```bash
 gh scaffolder ignore create Go
 ```
 

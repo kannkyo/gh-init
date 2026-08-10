@@ -18,7 +18,7 @@ Output files (`LICENSE`, `.gitignore`) are never overwritten or appended to — 
 
 ## Build & run
 
-```
+```bash
 go build -o gh-scaffolder .
 ./gh-scaffolder
 ```
