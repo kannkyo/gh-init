@@ -16,6 +16,7 @@ func newIgnoreCmd() *cobra.Command {
 	ignoreCmd.AddCommand(newIgnoreListCmd())
 	ignoreCmd.AddCommand(newIgnoreViewCmd())
 	ignoreCmd.AddCommand(newIgnoreCreateCmd())
+	ignoreCmd.AddCommand(newIgnoreAppendCmd())
 	return ignoreCmd
 }
 
@@ -76,6 +77,21 @@ func newIgnoreCreateCmd() *cobra.Command {
 	}
 }
 
+func newIgnoreAppendCmd() *cobra.Command {
+	return &cobra.Command{
+		Use:   "append <template>",
+		Short: "Append a GitHub .gitignore template to the existing .gitignore file",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			client, err := newRESTClient()
+			if err != nil {
+				return err
+			}
+			return runIgnoreAppend(client, args[0])
+		},
+	}
+}
+
 type ignoreTemplateResponse struct {
 	Source string `json:"source"`
 }
@@ -111,4 +127,29 @@ func runIgnoreCreate(client restGetter, template string) error {
 	}
 
 	return os.WriteFile(".gitignore", []byte(source), 0o644)
+}
+
+// runIgnoreAppend fetches the .gitignore template identified by template
+// and appends it to the existing ./.gitignore file.
+func runIgnoreAppend(client restGetter, template string) error {
+	existing, err := os.ReadFile(".gitignore")
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return fmt.Errorf(".gitignore does not exist, use \"ignore create\" instead")
+		}
+		return err
+	}
+
+	source, err := fetchIgnoreTemplateSource(client, template)
+	if err != nil {
+		return err
+	}
+
+	content := string(existing)
+	if len(content) > 0 && content[len(content)-1] != '\n' {
+		content += "\n"
+	}
+	content += source
+
+	return os.WriteFile(".gitignore", []byte(content), 0o644)
 }
