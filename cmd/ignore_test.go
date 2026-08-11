@@ -91,3 +91,79 @@ func TestRunIgnoreCreate_ExistingFile(t *testing.T) {
 		t.Fatalf("err = %v, want %q", err, want)
 	}
 }
+
+func TestRunIgnoreAppend_Success(t *testing.T) {
+	t.Chdir(t.TempDir())
+	if err := os.WriteFile(".gitignore", []byte("node_modules\n"), 0o644); err != nil {
+		t.Fatalf("setup: %v", err)
+	}
+
+	client := &fakeRESTClient{
+		getFunc: func(path string, response interface{}) error {
+			if path != "gitignore/templates/Go" {
+				t.Fatalf("unexpected path %q", path)
+			}
+			resp := response.(*ignoreTemplateResponse)
+			resp.Source = "*.o\n*.exe\n"
+			return nil
+		},
+	}
+
+	if err := runIgnoreAppend(client, "Go"); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got, err := os.ReadFile(".gitignore")
+	if err != nil {
+		t.Fatalf("reading .gitignore: %v", err)
+	}
+	want := "node_modules\n*.o\n*.exe\n"
+	if string(got) != want {
+		t.Errorf(".gitignore content = %q, want %q", got, want)
+	}
+}
+
+func TestRunIgnoreAppend_MissingNewline(t *testing.T) {
+	t.Chdir(t.TempDir())
+	if err := os.WriteFile(".gitignore", []byte("node_modules"), 0o644); err != nil {
+		t.Fatalf("setup: %v", err)
+	}
+
+	client := &fakeRESTClient{
+		getFunc: func(path string, response interface{}) error {
+			resp := response.(*ignoreTemplateResponse)
+			resp.Source = "*.o\n"
+			return nil
+		},
+	}
+
+	if err := runIgnoreAppend(client, "Go"); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got, err := os.ReadFile(".gitignore")
+	if err != nil {
+		t.Fatalf("reading .gitignore: %v", err)
+	}
+	want := "node_modules\n*.o\n"
+	if string(got) != want {
+		t.Errorf(".gitignore content = %q, want %q", got, want)
+	}
+}
+
+func TestRunIgnoreAppend_NoExistingFile(t *testing.T) {
+	t.Chdir(t.TempDir())
+
+	client := &fakeRESTClient{
+		getFunc: func(path string, response interface{}) error {
+			t.Fatal("API should not be called when .gitignore does not exist")
+			return nil
+		},
+	}
+
+	err := runIgnoreAppend(client, "Go")
+	want := ".gitignore does not exist, use \"ignore create\" instead"
+	if err == nil || err.Error() != want {
+		t.Fatalf("err = %v, want %q", err, want)
+	}
+}

@@ -10,11 +10,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `cmd/root.go` — root command wiring
 - `cmd/client.go` — `restGetter` interface wrapping `api.RESTClient.Get`, `newRESTClient` (swappable in tests), `formatAPIError` (maps 404s to `"<kind> \"<name>\" not found"`)
 - `cmd/license.go` — `license create <key>`
-- `cmd/ignore.go` — `ignore list` / `ignore view <template>` / `ignore create <template>`
+- `cmd/ignore.go` — `ignore list` / `ignore view <template>` / `ignore create <template>` / `ignore append <template>`
 
 Uses `github.com/cli/go-gh/v2` (the official gh extension SDK) for GitHub API access and `github.com/spf13/cobra` for CLI structure — these are the only two direct dependencies. GitHub API calls always go through the `restGetter` interface (not `api.RESTClient` directly) so commands can be unit tested with a fake client instead of hitting the network.
 
-Output files (`LICENSE`, `.gitignore`) are never overwritten or appended to — commands error out if the target file already exists. There is no `--force` flag by design.
+Output files (`LICENSE`, `.gitignore`) are never overwritten by `create` — commands error out if the target file already exists. There is no `--force` flag by design. The one exception is `ignore append`, which is explicitly for adding a template's contents to an existing `.gitignore`; it errors out instead if `.gitignore` does *not* exist (use `ignore create` first).
 
 ## Build & run
 

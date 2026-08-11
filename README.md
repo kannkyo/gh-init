@@ -49,6 +49,16 @@ gh scaffolder ignore create Go
 
 `<template>` must match one of the names returned by `gh scaffolder ignore list`.
 
+### `gh scaffolder ignore append <template>`
+
+Fetches a `.gitignore` template from GitHub and appends it to the existing `./.gitignore` file. Fails if `.gitignore` does not exist (use `ignore create` first).
+
+```bash
+gh scaffolder ignore append Node
+```
+
+`<template>` must match one of the names returned by `gh scaffolder ignore list`.
+
 ## Development
 
 See [CLAUDE.md](./CLAUDE.md) for build, test, and release instructions.
