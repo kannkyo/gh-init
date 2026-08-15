@@ -36,3 +36,13 @@ To run as an installed `gh` extension: `gh extension install .` from the repo ro
 ## Release process
 
 Releases are cut by pushing a tag matching `v*` (e.g. `git tag v0.1.0 && git push origin v0.1.0`). `.github/workflows/release.yml` uses `cli/gh-extension-precompile@v1` to cross-compile and publish the release automatically — there is no separate manual build/upload step. There is no CI workflow that runs on regular pushes/PRs (no build/test gate before merge).
+
+
+<!-- ai-dlc-lite pointer -->
+When the user invokes AI-DLC Lite (a message starting with "Using AI-DLC Lite, ..."),
+read and follow ``.aidlc-lite/aws-aidlc-lite-rules/lite-core-workflow.md``, using
+``.aidlc-lite/aws-aidlc-lite-rule-details/`` (NOT ``.kiro/`` or ``.amazonq/`` — those
+paths in that file are for other editors) as this project's rule-details directory,
+plus ``.aidlc-lite/aidlc-lite-overrides.md`` (which takes precedence on conflict),
+to start the workflow.
+<!-- ai-dlc-lite pointer -->
