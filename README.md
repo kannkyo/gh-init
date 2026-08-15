@@ -1,5 +1,7 @@
 # gh-scaffolder
 
+[![release](https://github.com/kannkyo/gh-init/actions/workflows/release.yml/badge.svg)](https://github.com/kannkyo/gh-init/actions/workflows/release.yml)
+
 A [GitHub CLI extension](https://cli.github.com/manual/gh_extension) that generates common project files (LICENSE, `.gitignore`) from GitHub's official templates.
 
 ## Installation
