@@ -2,11 +2,11 @@ package cmd
 
 import "github.com/spf13/cobra"
 
-// NewRootCmd builds the "scaffolder" root command with all subcommands
+// NewRootCmd builds the "init" root command with all subcommands
 // registered.
 func NewRootCmd() *cobra.Command {
 	root := &cobra.Command{
-		Use:           "scaffolder",
+		Use:           "init",
 		Short:         "gh-scaffolder generates common project files (LICENSE, .gitignore, ...)",
 		SilenceUsage:  true,
 		SilenceErrors: true,

@@ -12,52 +12,52 @@ gh extension install kannkyo/gh-scaffolder
 
 All commands use your existing `gh` authentication — no extra login step is required.
 
-### `gh scaffolder license create <license-key>`
+### `gh init license create <license-key>`
 
 Fetches a license template from GitHub, fills in `[year]` (current year) and `[fullname]` (from `git config user.name`), and writes it to `./LICENSE`. Fails if `LICENSE` already exists.
 
 ```bash
-gh scaffolder license create mit
-gh scaffolder license create apache-2.0
+gh init license create mit
+gh init license create apache-2.0
 ```
 
 `<license-key>` is a GitHub license identifier (e.g. `mit`, `apache-2.0`, `gpl-3.0`). See the [GitHub Licenses API](https://docs.github.com/en/rest/licenses) for the full list.
 
-### `gh scaffolder ignore list`
+### `gh init ignore list`
 
 Prints the names of all available `.gitignore` templates, one per line.
 
 ```bash
-gh scaffolder ignore list
+gh init ignore list
 ```
 
-### `gh scaffolder ignore view <template>`
+### `gh init ignore view <template>`
 
 Prints the contents of a `.gitignore` template to stdout without writing any file.
 
 ```bash
-gh scaffolder ignore view Go
+gh init ignore view Go
 ```
 
-### `gh scaffolder ignore create <template>`
+### `gh init ignore create <template>`
 
 Fetches a `.gitignore` template from GitHub and writes it to `./.gitignore`. Fails if `.gitignore` already exists.
 
 ```bash
-gh scaffolder ignore create Go
+gh init ignore create Go
 ```
 
-`<template>` must match one of the names returned by `gh scaffolder ignore list`.
+`<template>` must match one of the names returned by `gh init ignore list`.
 
-### `gh scaffolder ignore append <template>`
+### `gh init ignore append <template>`
 
 Fetches a `.gitignore` template from GitHub and appends it to the existing `./.gitignore` file. Fails if `.gitignore` does not exist (use `ignore create` first).
 
 ```bash
-gh scaffolder ignore append Node
+gh init ignore append Node
 ```
 
-`<template>` must match one of the names returned by `gh scaffolder ignore list`.
+`<template>` must match one of the names returned by `gh init ignore list`.
 
 ## Development
 
