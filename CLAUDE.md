@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-`gh-scaffolder` (module `github.com/kannkyo/gh-scaffolder`) is a [GitHub CLI extension](https://cli.github.com/manual/gh_extension) that generates common project files (LICENSE, `.gitignore`) from GitHub's template APIs. See [README.md](./README.md) for user-facing command usage.
+`gh-init` (module `github.com/kannkyo/gh-init`) is a [GitHub CLI extension](https://cli.github.com/manual/gh_extension) that generates common project files (LICENSE, `.gitignore`) from GitHub's template APIs. See [README.md](./README.md) for user-facing command usage.
 
 `main.go` only builds and executes the cobra root command from `cmd/`. Command implementations live in `cmd/`:
 - `cmd/root.go` — root command wiring
@@ -19,11 +19,11 @@ Output files (`LICENSE`, `.gitignore`) are never overwritten by `create` — com
 ## Build & run
 
 ```bash
-go build -o gh-scaffolder .
-./gh-scaffolder
+go build -o gh-init .
+./gh-init
 ```
 
-To run as an installed `gh` extension: `gh extension install .` from the repo root, then `gh scaffolder`.
+To run as an installed `gh` extension: `gh extension install .` from the repo root, then `gh init`.
 
 ## Testing & linting
 

@@ -1,4 +1,4 @@
-# gh-scaffolder
+# gh-init
 
 [![release](https://github.com/kannkyo/gh-init/actions/workflows/release.yml/badge.svg)](https://github.com/kannkyo/gh-init/actions/workflows/release.yml)
 
@@ -7,7 +7,7 @@ A [GitHub CLI extension](https://cli.github.com/manual/gh_extension) that genera
 ## Installation
 
 ```bash
-gh extension install kannkyo/gh-scaffolder
+gh extension install kannkyo/gh-init
 ```
 
 ## Usage

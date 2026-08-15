@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/kannkyo/gh-scaffolder/cmd"
+	"github.com/kannkyo/gh-init/cmd"
 )
 
 func main() {

@@ -7,7 +7,7 @@ import "github.com/spf13/cobra"
 func NewRootCmd() *cobra.Command {
 	root := &cobra.Command{
 		Use:           "init",
-		Short:         "gh-scaffolder generates common project files (LICENSE, .gitignore, ...)",
+		Short:         "gh-init generates common project files (LICENSE, .gitignore, ...)",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 	}

@@ -1,4 +1,4 @@
-module github.com/kannkyo/gh-scaffolder
+module github.com/kannkyo/gh-init
 
 go 1.26.5
 

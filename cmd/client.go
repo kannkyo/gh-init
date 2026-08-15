@@ -7,7 +7,7 @@ import (
 	"github.com/cli/go-gh/v2/pkg/api"
 )
 
-// restGetter is the subset of api.RESTClient used by scaffolder commands.
+// restGetter is the subset of api.RESTClient used by init commands.
 type restGetter interface {
 	Get(path string, response interface{}) error
 }
